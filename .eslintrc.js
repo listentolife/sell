@@ -25,6 +25,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // 强制要求语句句尾添加分号
     'semi':['error', 'always'],
+    // indent的缩进设置为0
     'indent': 0
   }
 }
