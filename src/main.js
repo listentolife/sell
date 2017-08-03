@@ -19,6 +19,8 @@ Vue.use(VueResouce);
 
 // Vue.config.debug = true;
 
+// 定义路由（属于第二步，第一步为创建路由组件）
+
 const routes = [{
   path: '/',
   redirect: '/goods'
@@ -33,10 +35,15 @@ const routes = [{
   component: seller
 }];
 
+// 创建router实例，然后传‘router’配置（属于第三部）
+
 const router = new VueRouter({
+  // 这里linkActiveClass指定为active
   linkActiveClass: 'active',
   routes
 });
+
+// 创建和挂载根实例（属于第四步）
 
 /* eslint-disable no-new */
 new Vue({

@@ -13,7 +13,9 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
+    <!-- keep-alive组件用来缓存组件，避免多次加载相应的组件，减少性能消耗 -->
     <keep-alive>
+      <!-- 路由出口，路由匹配到的组件将渲染在这里 -->
       <router-view :seller="seller"></router-view>
     </keep-alive>
   </div>
@@ -24,6 +26,14 @@
   import header from './components/header/header.vue';
 
   const ERR_OK = 0;
+
+  /*
+   *export, export default跟import
+   *1.export, export default均可用于到处常量、函数、文件、模块等。通过import (常量|函数|文件|模块)名 的方式将其导入；
+   *2.export,import可以有多个，export default仅有一个；
+   *3.export default可以为模块指定默认输出；
+   *http://es6.ruanyifeng.com/#docs/module#export-命令
+   */
 
   export default {
     data () {
