@@ -1,3 +1,7 @@
+
+
+// 移动端设备物理像素是设备像素的两倍
+// 解决方案：在该元素后面添加一个伪类:after，并把它设置成一条线，然后在base.js设置.border-1px样式，通过检测不同设备的dpi来做不同的缩放
 border-1px($color)
   position: relative
   &:after
