@@ -4,7 +4,7 @@ import Vue from 'vue';
 import App from './App';
 // import router from './router';
 import VueRouter from 'vue-router';
-import VueResouce from 'vue-resource';
+import VueResource from 'vue-resource';
 import goods from '@/components/goods/goods.vue';
 import ratings from '@/components/ratings/ratings.vue';
 import seller from '@/components/seller/seller.vue';
@@ -14,8 +14,9 @@ import '@/common/stylus/index.styl';
 // 以下这句没有，暂保留
 // Vue.config.productionTip = false;
 
+// 注册VueRouter跟VurResouce
 Vue.use(VueRouter);
-Vue.use(VueResouce);
+Vue.use(VueResource);
 
 // Vue.config.debug = true;
 

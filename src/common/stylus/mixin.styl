@@ -13,6 +13,18 @@ border-1px($color)
     border-top: 1px solid $color
     content: ' '
 
+// 如果是需要在元素前面添加1px的线，则只要把伪类设在前面，并且定位到元素顶部    
+// border-top-1px($color)
+//   position: relative
+//   &:before
+//     display: block
+//     position:absolute
+//     left: 0
+//     top: 0
+//     width: 100%
+//     border-top: 1px solid $color
+//     content: ' '
+
 border-none()
   &:after
     display: none
