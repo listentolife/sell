@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 从后端获得的seller对象的数据，通过v-bind传入到子组件v-header -->
     <v-header :seller="seller"></v-header>
     <div class="tab border-1px">
       <div class="tab-item">
@@ -55,6 +56,7 @@
     });
   },
     components: {
+      // 这里注册了header组件(上面已经引入了组件文件)
       'v-header': header
     }
   };

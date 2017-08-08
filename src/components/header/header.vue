@@ -2,6 +2,7 @@
   <div class="header">
     <div class="content-wrapper">
       <div class="avatar">
+        <!-- 这里的src引用seller对象中的属性，由于编译中seller是个空对象，所以会报错，也需要通过v-bind来引入 -->
       	<img width="64" height="64" :src="seller.avatar">
       </div>
       <div class="content">
@@ -10,9 +11,11 @@
       	  <span class="name">{{seller.name}}</span>
       	</div>
       	<div class="description">
-      		{{seller.description}}/{{seller.deliveryTime}}分钟
+      		{{seller.description}}/{{seller.deliveryTime}}分钟到达
       	</div>
+        <!-- 这里使用v-if跟上面用v-bind引入seller.avatar的原因是一样的，因为获取seller对象是个异步过程，在编译中直接使用seller.supports会报错未定义，所以需要做判断 -->
       	<div v-if="seller.supports" class="support">
+          <!-- 这里的icon会根据seller.support[0].type的不同而变化。这里就需要在created中定义一个classMap的数组变量并一一对应type来引入到这里，再在样式中确定不同class下对应的背景图片 -->
       	  <span class="icon" :class="classMap[seller.supports[0].type]"></span>
       	  <span class="text">{{seller.supports[0].description}}</span>
       	</div>
@@ -23,6 +26,7 @@
       </div>
     </div>
     <div class="bulletin-wrapper" @click="showDetail">
+      <!-- 这里两个<span>没换行是为了减少空字符的占位 -->
       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
@@ -72,6 +76,7 @@ import star from '../star/star.vue';
 
 export default {
   props: {
+    // App.vue中传过来的seller对象通过props来接收
     seller: {
       type: Object
     }
@@ -110,6 +115,7 @@ export default {
     .content-wrapper
       position: relative
       padding: 24px 12px 18px 24px
+      // 这里设置font-size为0是为了子元素在显示上不会出现空字符占位而存在的缝隙，同时子元素的样式要单独设置font-size
       font-size: 0
       .avatar
         display: inline-block
@@ -182,7 +188,8 @@ export default {
       height: 28px
       line-height: 28px
       padding: 0 22px 0 12px
-      white-space: nowrap
+      // white-space设置为不折行，overflow设置为超出部分隐藏，text-overflow设置为用省略符号代表被修剪的文本
+      white-space: nowrap  
       overflow: hidden
       text-overflow: ellipsis
       background: rgba(7, 17, 27, 0.2)
@@ -211,6 +218,7 @@ export default {
       left: 0
       width: 100%
       height: 100%
+      // 这里将z-index设置-1，把这个块设置到最底层，然后将filter设置高斯模糊
       z-index: -1
       filter: blur(10px)
     .fade-enter-active, .fade-leave-active
