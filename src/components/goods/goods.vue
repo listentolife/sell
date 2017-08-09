@@ -194,6 +194,7 @@ export default {
     width:100%
     overflow:hidden
     .menu-wrapper
+      //flex三个属性：等分，空间不足的缩放，占位空间
       flex: 0 0 80px
       width:80px
       background: #f3f5f7

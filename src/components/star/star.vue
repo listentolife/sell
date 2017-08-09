@@ -1,3 +1,5 @@
+<!-- star组件，外部会传入size跟score两个值。把score分数转换为对应的数值，数值取值为无星，半星跟全星的类名，然后用v-for传到span标签中；把size传入计算出starType，确定使用对应size的类 -->
+
 <template>
   <div class="star" :class="starType">
     <!-- v-for的写法修改，track-by修改成key -->
@@ -66,7 +68,7 @@
         margin-right: 22px
         background-size: 20px 20px
         &:last-child
-        
+          margin-right: 0
         &.on
           bg-image('star48_on')
         &.half
@@ -80,7 +82,7 @@
         margin-right: 16px
         background-size: 15px 15px
         &:last-child
-        
+          margin-right: 0
         &.on
           bg-image('star36_on')
         &.half
@@ -94,7 +96,7 @@
         margin-right: 3px
         background-size: 10px 10px
         &:last-child
-        
+          margin-right: 0
         &.on
           bg-image('star24_on')
         &.half

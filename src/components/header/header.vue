@@ -33,7 +33,9 @@
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%">
     </div>
+    <!-- <transition>是动画标签，包住需要动画的块，然后设置fade样式即可 -->
     <transition name="fade">
+     <!-- CSS Sticky footers布局：一般外部有两个层，一个包装内容，一个固定底部；前者设置最小高度等于视窗高度，其内部内容层设置padding-bottom为后者高度，后者设置margin为负高度使其保持能出现在视窗底部 -->
      <div v-show="detailShow" class="detail">
       <div class="detail-wrapper clearfix">
       	<div class="detail-main">
@@ -221,8 +223,10 @@ export default {
       // 这里将z-index设置-1，把这个块设置到最底层，然后将filter设置高斯模糊
       z-index: -1
       filter: blur(10px)
+    // 进入跟退出详情弹层，都会有个从透明到不透明，或者不透明到透明的动画
     .fade-enter-active, .fade-leave-active
       transition: opacity 0.5s
+    // 在点击跟详情弹层消失后，都设置opacity: 0透明
     .fade-enter, .fade-leave-active
       opacity: 0
     .detail
@@ -237,19 +241,21 @@ export default {
       backdrop-filter: blur(10px)
       .detail-wrapper
         width: 100%
+        // 这里设置最小的高度跟视窗一样高
         min-height: 100%
         .detail-main
           margin-top: 64px
           padding-bottom: 64px
           .name
             line-height: 16px
-            text-align:center
+            text-align: center
             font-size: 16px
             font-weight: 700
           .star-wrapper
-            margin-top:18px
-            padding:2px 0
-            text-align:center
+            margin-top: 18px
+            padding: 2px 0
+            text-align: center
+          // fixed布局，.title设置display: flex, .line是等分，所以设置flex: 1, .text则用内容撑开，不需要设置flex
           .title
             display: flex
             width: 80%
