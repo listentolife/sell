@@ -44,6 +44,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+// better-scroll的github地址：https://github.com/ustbhuangyi/better-scroll
 import BScroll from 'better-scroll';
 import shopcart from '../shopcart/shopcart';
 import cartcontrol from '../cartcontrol/cartcontrol';
@@ -101,11 +102,14 @@ export default {
     this.$http.get('/api/goods').then((response) => {
       response = response.body;
       if (response.errno === ERR_OK) {
+        // 这里的good需要现在data中声明
         this.goods = response.data;
 
-        // 在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+        // $nextTick()的官方文档：在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+        // 在Vue生命周期的creat()钩子函数中进行DOM操作，需要用到$nextTick()，否则在creat()执行时，DOM其实并未进行任何渲染，所以对DOM的操作没有意义
+        // 还有一种使用$nextTick()的情况：当数据变化后要执行某个操作，这个操作需要使用岁数据改变而改变的DOM结构的时候，这个操作也应该放在$nextTick()的回调函数中
         this.$nextTick(() => {
-          // 重新初始化DOM结构，并获取当前商品列表的高度数组
+          // 重新初始化DOM结构，并初始化Better-Scroll，获取当前商品列表的高度数组
           this._initScroll();
           this._calculatHeight();
         });
@@ -137,8 +141,10 @@ export default {
         this.$refs.shopcart.drop(target);
       });
     },
-    // BS插件_initScroll的函数，主要用来对左右两侧DOM结构进行初始化
+    // BS插件_initScroll的函数，Better-Scroll实例化需要接受左右两侧DOM结构，所以放在method中进行初始化
     _initScroll () {
+      // Better-Scroll的构造函数接受两个参数：DOM对象，Option参数[JSON对象]
+      // 这里使用的ref是用来绑定一个DOM元素或某个组件，然后在$ref中调用
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {
         click: true
       });
