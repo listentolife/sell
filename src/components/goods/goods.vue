@@ -151,10 +151,12 @@ export default {
       this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
         // 后面的添加购物车的组件需要产品栏的点击反馈，所以需要设置click为true
         click: true,
+        // 文档说明： 3--除了手指 move 的时候派发scroll事件，在 swipe（手指迅速滑动一小段距离）的情况下，列表会有一个长距离的滚动动画，这个滚动的动画过程中也会实时派发滚动事件
         probeType: 3
       });
 
       // 在滚动商品栏的时候，实时获得商品栏的y轴坐标
+      // 这里获得的scrollY需要在currentIndex()被监听，所以currentIndex()放在computed属性里
       this.foodsScroll.on('scroll', (pos) => {
         this.scrollY = Math.abs(Math.round(pos.y));
       });
