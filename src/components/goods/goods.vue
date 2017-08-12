@@ -128,11 +128,14 @@ export default {
       this._drop(target);
     },
     selectMenu (index, event) {
+      // 这里因为使用了better-scroll的派发事件，同时触发了原生的派发事件，实际上点击会触发这两个事件。为了触发不执行原生的派发事件，这里利用两个事件的属性不同判断不执行原生的派发事件
       if (!event._constructed) {
        return;
       }
+
       let foodlist = this.$refs.foodList;
       let el = foodlist[index];
+      //better-scroll的api scrollToElement(el, time, offsetX, offsetY, easing)：滚动到某个元素，el（必填）表示 dom 元素，time 表示动画时间，offsetX 和 offsetY 表示坐标偏移量，easing 表示缓动函数
       this.foodsScroll.scrollToElement(el, 300);
     },
     _drop (target) {
