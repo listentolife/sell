@@ -16,7 +16,7 @@
     </div>
     <!-- keep-alive组件用来缓存组件，避免多次加载相应的组件，减少性能消耗 -->
     <keep-alive>
-      <!-- 路由出口，路由匹配到的组件将渲染在这里 -->
+      <!-- 路由出口，路由匹配到的组件将渲染在这里，同时seller对象也可以传递到路由中 -->
       <router-view :seller="seller"></router-view>
     </keep-alive>
   </div>

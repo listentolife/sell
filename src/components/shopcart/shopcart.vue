@@ -61,6 +61,7 @@
 
   export default {
     props: {
+      // 这里的selectFood是需要从good组件把客户选择的菜单传进来，所以这里需要在props中声明一个数组
       // 注册已选择的商品数组
       selectFoods: {
         type: Array,
@@ -115,7 +116,7 @@
       totalCount () {
         let count = 0;
         this.selectFoods.forEach((food) => {
-          // 计算每种商品的单价乘以数量，累加到total上
+          // 计算数量的总和
           count += food.count;
         });
         return count;
@@ -262,18 +263,18 @@
           border-radius: 50%
           background: #141d27
           .logo
-           width: 100%
-           height: 100%
-           border-radius: 50%
-           text-align: center
-           background:rgba(255, 255, 255, 0.2)
-           &.highlight
-             background: rgb(0, 160, 220)
-           .icon-shopping_cart
-             line-height: 44px
-             font-size: 24px
-             &.highlight
-               color: #fff
+            width: 100%
+            height: 100%
+            border-radius: 50%
+            text-align: center
+            background:rgba(255, 255, 255, 0.2)
+            &.highlight
+              background: rgb(0, 160, 220)
+            .icon-shopping_cart
+              line-height: 44px
+              font-size: 24px
+              &.highlight
+                color: #fff
           .num
             position: absolute
             top: 0
