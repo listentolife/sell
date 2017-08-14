@@ -40,7 +40,7 @@
               <div class="price">
                 <span>￥{{food.price*food.count}}</span>
               </div>
-              <div class="cartcontrol-wrrapper">
+              <div class="cartcontrol-wrapper">
                 <cartcontrol :food="food"></cartcontrol>
               </div>
             </li>
@@ -389,7 +389,7 @@
             font-size: 14px
             font-weight: 700
             color: rgb(240, 20, 20)
-          .cartcontrol-wrrapper
+          .cartcontrol-wrapper
             position: absolute
             right: 0
             bottom: 6px

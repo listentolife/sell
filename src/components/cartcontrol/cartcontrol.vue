@@ -24,8 +24,9 @@ export default {
       if (!event._constructed) {
         return;
       }
-      console.log('click');
+      // console.log('click');
       if (!this.food.count) {
+        // 对于需要在函数中新增props属性对象的属性时，可以用Vue.set来添加
         Vue.set(this.food, 'count', 1);
       } else {
         this.food.count++;
@@ -37,7 +38,7 @@ export default {
       if (!event._constructed) {
         return;
       }
-      console.log('click');
+      // console.log('click');
       if (this.food.count > 0) {
         this.food.count--;
       }
