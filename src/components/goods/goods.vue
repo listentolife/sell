@@ -87,6 +87,7 @@ export default {
       this.goods.forEach((good) => {
         // 遍历所有good里的food
         good.foods.forEach((food) => {
+          // 这里的food.count是在cartcontrol组件添加到food对象中的，所以这里可以直接调用
           // 如果food.count大于0，则
           if (food.count) {
             foods.push(food);

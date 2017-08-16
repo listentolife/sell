@@ -56,12 +56,16 @@ export default {
       opacity: 1
       transform: translate3d(0, 0, 0)
       .inner
+        // 这里设置display: inline-block是保证有宽高，这样动画才能显示效果
         display: inline-block
         line-height: 24px
         font-size: 24px
         color: rgb(0, 160, 220)
+        // transition：transition-property | transition-duration | transition-timing-function | tansition-delay
+        // 过渡效果CSS属性名称|过渡效果时间|速度曲线|开始时间
         transition: all 0.4s linear
         transform: rotate(0)
+    // 这里，减号按钮出现的动画只需要设置过渡效果，不需要设置位置，因为减号未出现时右边的并没有数字，导致位置靠右，当点击+1后，右边的.cart-count会有数字并被撑大，减号按钮会在展示的同时被推到左边，所以会有向左滚动的效果
     &.move-enter-active, .move-leave-active
       transition: all 0.4s linear
     &.move-enter, .move-leave-active
