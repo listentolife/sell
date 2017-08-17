@@ -388,8 +388,9 @@
           color: rgb(0, 160, 220)
       .list-content
         padding: 0 18px
-        max-height: 217px
         background: #fff
+        // 这里控制了购物车清单这块的高度，超出部分也被隐藏
+        max-height: 217px
         overflow: hidden
         .food
           position:relative
