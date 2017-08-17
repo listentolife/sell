@@ -136,11 +136,12 @@ export default {
 
       let foodlist = this.$refs.foodList;
       let el = foodlist[index];
-      //better-scroll的api scrollToElement(el, time, offsetX, offsetY, easing)：滚动到某个元素，el（必填）表示 dom 元素，time 表示动画时间，offsetX 和 offsetY 表示坐标偏移量，easing 表示缓动函数
+      // better-scroll的api scrollToElement(el, time, offsetX, offsetY, easing)：滚动到某个元素，el（必填）表示 dom 元素，time 表示动画时间，offsetX 和 offsetY 表示坐标偏移量，easing 表示缓动函数
       this.foodsScroll.scrollToElement(el, 300);
     },
     _drop (target) {
-      // 体验优化，又不执行下落动画
+      // 这里在更新后的DOM下再调用子组件shopcart组件的drop()方法实现下落动画
+      // 体验优化，异步执行下落动画
       this.$nextTick(() => {
         this.$refs.shopcart.drop(target);
       });
@@ -186,6 +187,7 @@ export default {
     food
   },
   events: {
+    // 这个add事件用来接收从cartcontrol组件中传过来的target节点，然后传到私有方法_drop()中
     'add' (target) {
       this._drop(target);
     }
@@ -206,7 +208,7 @@ export default {
     width:100%
     overflow:hidden
     .menu-wrapper
-      //flex三个属性：等分，空间不足的缩放，占位空间
+      // flex三个属性：等分，空间不足的缩放，占位空间
       flex: 0 0 80px
       width:80px
       background: #f3f5f7

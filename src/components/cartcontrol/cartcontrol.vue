@@ -32,6 +32,7 @@ export default {
         this.food.count++;
       }
       // vuejs2.0放弃使用$dispatch()方法
+      // 当触发addCart事件后，就通过$emit()派发一个事件，并且把当前的节点传到goods组件中，goods组件add事件又把这个节点传到shopcart组件的drop()中，实现动画
       this.$emit('add', event.target);
     },
     decreaseCart (event) {

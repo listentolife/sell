@@ -18,10 +18,18 @@
       	</div>
       </div>
     </div>
+    <!-- 点击按钮后飞入购物车的动画需求：
+         1.点击购买按钮后，在购买按钮的位置出现小球飞入购物车；
+         2.小球飞入购物车的弧线是先向上后向下的；
+         3.在连续点击购买的情况下，小球会不断飞入；
+         4.小球在完成飞入购物车前后是隐藏的 -->
     <div class="ball-container">
+      <!-- 这里用v-for实现小球连续飞入的动画效果 -->
       <div v-for="ball in balls">
+        <!-- 这里使用了transition的JavaScript钩子函数。当ball.show边为true时，就自动按顺序触发transition属性中声明的JavaScript钩子。beforeDrop()是实现小球下落动画，dropping()是实现小球下落后复位，afterDrop()是实现复位后重置 -->
         <transition name="drop" @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop">
-          <div class="ball">
+          <!-- transition组件中的元素或组件可以给有下列情形（v-if，v-show，动态组件，组件根节点）的任何元素和组件添加进入/离开过渡下效果 -->
+          <div class="ball" v-show="ball.show">
             <div class="inner inner-hook"></div>
           </div>
         </transition>
@@ -160,7 +168,9 @@
     },
     methods: {
       drop (el) {
+        // 这里，每次点击添加购物车都会触发drop(),然后就会重新遍历balls数组
         for (let i = 0; i < this.balls.length; i++) {
+          // 遍历每一个ball，如果ball.show为true，则ball在展示中，遍历下一个ball；如果为false，则把ball.show置为true，然后用ball.el记录对应的el节点，并用dropBalls来存放这个ball，然后return结束函数
           let ball = this.balls[i];
           if (!ball.show) {
             ball.show = true;
@@ -172,15 +182,21 @@
       },
       beforeDrop (el) {
         let count = this.balls.length;
+        // 这里用while遍历所有的ball，如果ball.show为true，则进行过渡动画前的设置
         while (count--) {
           let ball = this.balls[count];
           if (ball.show) {
+            // 获得ball对应事件节点在视口的位置(getBoundingClientRect()返回的是这个元素与页面四边的距离，用left,top,right,bottom来表示)
             let rect = ball.el.getBoundingClientRect();
+            // x,y分别计算小球起始位置到购物车的高度跟宽度距离
             let x = rect.left - 32;
             let y = -(window.innerHeight - rect.top - 22);
+            // 先让元素对象显示出来
             el.style.display = '';
+            // 这里设置ball外层元素的纵向移动
             el.style.webkitTransform = `translate3d(0,${y}px,0)`;
             el.style.transform = `(0,${y}px,0)`;
+            // 这里设置ball内层元素的横向移动
             let inner = el.getElementByClassName('innerhook')[0];
             inner.style.webkitTransform = `translate3d(${x}px,0,0)`;
             inner.style.transform = `translate3d(${x}px,0,0)`;
@@ -188,8 +204,9 @@
         }
       },
       dropping (el, done) {
+        // 这里是手动触发浏览器重绘，但rf变量后续不使用，所以需要添加一下注释避免eslint报错
         /* eslint-disable no-unused-vars */
-        let rf = el.offsetHeight;
+        let rf = el.offsetHeight; 
         this.$nextTick(() => {
           el.style.webkitTransform = 'translate3d(0,0,0)';
           el.style.transform = 'translate3d(0,0,0)';
@@ -325,10 +342,12 @@
             background: #00b43c
     .ball-container
       .ball
+        // 这里把球的position设置为fixed，可以相对于浏览器窗口进行定位
         position: flex
         left: 32px
         bottom: 22px
         z-index: 200
+        // 这里使用了贝塞尔曲线 http://cubic-bezier.com/#.17,.67,.83,.67
         transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41)
         .inner
           width: 16px
@@ -336,12 +355,12 @@
           border-radius: 50%
           background: rgb(0, 160, 220)
           transition: all 0.4s linear
-      &.drop
-      &.move-enter-active, .move-leave-active
-        transition: all 0.4s linear
-      &.move-enter, .move-leave-active
-        opacity: 0
-        transform: translate3D(24x, 0, 0)
+      // &.drop
+      // &.move-enter-active, .move-leave-active
+      //   transition: all 0.4s linear
+      // &.move-enter, .move-leave-active
+      //   opacity: 0
+      //   transform: translate3D(24x, 0, 0)
     .shopcart-list
       position: absolute
       top: 0
