@@ -20,6 +20,7 @@
       	  <div class="cartcontrol-wrapper">
       	  	<cartcontrol :food="food"></cartcontrol>
       	  </div>
+          <!-- 这里添加transition是为了让这个按钮的消失减缓，小球的动画可以获得这个按钮的位置 -->
       	  <transition name="fade">
       	    <div class="buy" v-show="!food.count || food.count===0" @click.stop.prevent="addFirst($event)">加入购物车</div>
       	  </transition>
@@ -165,6 +166,7 @@
       position: relative
       width: 100%
       height: 0
+      // padding-top设置的百分比是基于父元素宽度的
       padding-top: 100%
       img
         position: absolute

@@ -154,6 +154,7 @@
         let show = !this.fold;
         if (show) {
           this.$nextTick(() => {
+            // 这里对this.scroll的判断是为了在每次展开时不需要重复声明this.scroll，直接刷新即可
             if (!this.scroll) {
               this.scroll = new BScroll(this.$refs.listContent, {
                 click: true
