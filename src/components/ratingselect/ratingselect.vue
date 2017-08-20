@@ -19,20 +19,25 @@
 
   export default {
     props: {
+      // 数组跟对象在prop中都需要用函数返回
+      // ratings从父组件获得的是food.ratings
       ratings: {
         type: Array,
         default () {
           return [];
         }
       },
+      // 标签类型
       selectType: {
         type: Number,
         default: ALL
       },
+      // 是否只显示有内容
       onlyContent: {
         type: Boolean,
         default: false
       },
+      // 标签名称数组，可动态修改
       desc: {
         type: Object,
         default () {
@@ -45,6 +50,7 @@
       }
     },
     computed: {
+      // positives()跟negatives()都是利用了array.filter()筛选了对应条件的rating
       positives () {
         return this.ratings.filter((rating) => {
           return rating.rateType === POSITIVE;
@@ -62,6 +68,7 @@
           return;
         }
         // this.selectType = type;
+        // 这里用emit(派发事件, 传入参数)将type传给父组件，通过父组件的selectRating()来接收并修改selectType
         this.$emit('select', type);
       },
       toggleContent (event) {

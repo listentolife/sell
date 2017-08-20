@@ -74,6 +74,7 @@
     data () {
       return {
         showFlag: false,
+        // 下面是对应ratingselect子组件的props添加的数据
         selectType: ALL,
         onlyContent: true,
         desc: {
