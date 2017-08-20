@@ -59,6 +59,7 @@
   import BScroll from 'better-scroll';
   import cartcontrol from '../cartcontrol/cartcontrol';
   import Vue from 'vue';
+  // 这里引入使用花括号只引入文件中可导出的函数
   import {formatDate} from '../../common/js/date.js';
   import split from '../split/split';
   import ratingselect from '../ratingselect/ratingselect';
@@ -122,6 +123,7 @@
       },
       selectRating (type) {
         this.selectType = type;
+        // 这里由于改变了selectType会导致DOM需要更新，DOM的更新是异步更新，所以需要用this.$nextTick()
         this.$nextTick(() => {
           this.scroll.refresh();
         });
