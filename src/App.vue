@@ -41,8 +41,8 @@
       return {
         seller: {
           id: (() => {
-            let querParam = urlParse();
-            return querParam.id;
+            let queryParam = urlParse();
+            return queryParam.id;
           })()
         }
       };

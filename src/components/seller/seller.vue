@@ -93,6 +93,7 @@
       }
     },
     watch: {
+      // 这里是观察seller组件DOM被更新，则异步调用_initScroll()跟_initPics()，refresh滑动
       'seller' () {
         this.$nextTick(() => {
           this._initScroll();
@@ -101,6 +102,7 @@
       }
     },
     mounted () {
+      // 这里在vue的生命周期中，更新DOM都异步更新better-scroll，保证滑动正常
       this.$nextTick(() => {
         this._initScroll();
         this._initPics();
@@ -125,6 +127,7 @@
       },
       _initPics () {
         if (this.seller.pics) {
+          // 这里需要计算手动计算ul的宽度，保证ul宽度大于外层div的宽度，才能使用better-scroll
           let picWidth = 120;
           let margin = 6;
           let width = (picWidth + margin) * this.seller.pics.length - margin;

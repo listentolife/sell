@@ -149,6 +149,7 @@
         width: 137px
         border-right: 1px solid rgba(7, 17, 27, 0.1)
         text-align: center
+        // 这里使用媒体查询，应对当屏幕显示宽度小于等于320px时需要修改的样式
         @media only screen and (max-width:320px)
           flex: 0 0 120px
           width: 120px
